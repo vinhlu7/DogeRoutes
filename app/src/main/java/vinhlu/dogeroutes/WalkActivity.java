@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat;
 
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -32,7 +34,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 public class WalkActivity extends FragmentActivity
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener,
+        View.OnClickListener {
 
     private GoogleMap mMap;
     private SupportMapFragment mapFrag;
@@ -41,6 +44,7 @@ public class WalkActivity extends FragmentActivity
     private Location mLastLocation;
     private Marker mCurrLocationMarker;
     private FusedLocationProviderClient mFusedLocationClient;
+    private ImageButton startStopButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,12 @@ public class WalkActivity extends FragmentActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        startStopButton = (ImageButton) findViewById(R.id.startStopButton);
+        startStopButton.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+        startStopButton.setTag("start");
+        startStopButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -216,6 +226,22 @@ public class WalkActivity extends FragmentActivity
                         new String[]{ android.Manifest.permission.ACCESS_FINE_LOCATION },
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.startStopButton:
+                if (startStopButton.getTag() == "start") {
+                    startStopButton.setTag("stop");
+                    startStopButton.setContentDescription("stop");
+                    startStopButton.setImageResource(R.drawable.ic_stop_white_24dp);
+                } else {
+                    startStopButton.setTag("start");
+                    startStopButton.setContentDescription("start");
+                    startStopButton.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+                }
         }
     }
 }
