@@ -58,7 +58,7 @@ public class WalkActivity extends FragmentActivity
 
         startStopButton = (ImageButton) findViewById(R.id.startStopButton);
         startStopButton.setImageResource(R.drawable.ic_play_arrow_white_24dp);
-        startStopButton.setTag("start");
+        startStopButton.setContentDescription("start");
         startStopButton.setOnClickListener(this);
 
     }
@@ -233,12 +233,10 @@ public class WalkActivity extends FragmentActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.startStopButton:
-                if (startStopButton.getTag() == "start") {
-                    startStopButton.setTag("stop");
+                if (startStopButton.getContentDescription().equals("start")) {
                     startStopButton.setContentDescription("stop");
                     startStopButton.setImageResource(R.drawable.ic_stop_white_24dp);
                 } else {
-                    startStopButton.setTag("start");
                     startStopButton.setContentDescription("start");
                     startStopButton.setImageResource(R.drawable.ic_play_arrow_white_24dp);
                 }
