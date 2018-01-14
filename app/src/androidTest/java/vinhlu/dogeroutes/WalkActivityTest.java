@@ -20,7 +20,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.*;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class StartButtonCreationTest {
+public class WalkActivityTest {
     @Rule
     public ActivityTestRule<WalkActivity> walkActivityTestRule =
             new ActivityTestRule<>(WalkActivity.class);
