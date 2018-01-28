@@ -33,4 +33,6 @@ public class WalkActivityTest {
         onView(withId(R.id.startStopButton)).check(matches(withContentDescription("start")));
     }
 
+
+
 }
